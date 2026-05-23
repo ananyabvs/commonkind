@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A free, bilingual (English/Spanish) directory of Houston resources for food, housing, healthcare, immigration, mental health, and family support." />
+  <meta property="og:title" content="Houston Care Connect — Find help in Houston" />
+  <meta property="og:description" content="Free bilingual directory of Houston resources. 3 quick questions, real help." />
+  <meta property="og:type" content="website" />
+  <title>Houston Care Connect — Find help in Houston</title>
+
+  <!-- GoatCounter Analytics -->
+  <script data-goatcounter="https://ananyabvs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --rust:     #c0392b;
+      --rust-lt:  #fdf0ee;
+      --rust-mid: #e74c3c;
+      --navy:     #1a2744;
+      --navy-mid: #243358;
+      --gold:     #d4a017;
+      --gold-lt:  #fef9ec;
+      --ink:      #1a1f2e;
+      --ink-mid:  #3d4459;
+      --ink-soft: #6b7280;
+      --border:   #e2e0dc;
+      --bg:       #faf8f5;
+      --white:    #ffffff;
+      --radius:   10px;
+      --shadow:   0 2px 18px rgba(26,39,68,.10);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+    a { color: var(--rust); }
+
+    .skip { position:absolute; left:-9999px; top:4px; }
+    .skip:focus { left:16px; background:var(--navy); color:#fff; padding:6px 12px; border-radius:6px; z-index:999; }
+
+    /* Header */
+    header {
+      background: var(--navy);
+      padding: 16px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; color: #fff; letter-spacing: .01em;
+    }
+    .logo span { color: var(--gold); }
+    .lang-btns { display:flex; gap:8px; }
+    .lang-btn {
+      font-size:.8rem; font-weight:600; padding:5px 14px;
+      border:1.5px solid rgba(255,255,255,.3); border-radius:20px;
+      background:transparent; cursor:pointer; color:rgba(255,255,255,.8);
+      transition: all .15s; font-family: inherit;
+    }
+    .lang-btn.active, .lang-btn:hover { border-color:#fff; color:#fff; background:rgba(255,255,255,.12); }
+
+    /* Hero */
+    .hero-wrap {
+      background: var(--navy);
+      padding: 48px 28px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-wrap::after {
+      content:'';
+      position:absolute; bottom:0; left:0; right:0; height:32px;
+      background: var(--bg);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .hero-wrap h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem,5vw,2.9rem);
+      color: #fff; line-height: 1.2; margin-bottom: 14px;
+    }
+    .hero-wrap h1 em { color: var(--gold); font-style:normal; }
+    .hero-wrap p { color: rgba(255,255,255,.72); font-size:1.05rem; max-width:520px; margin:0 auto; }
+
+    /* Main */
+    main { max-width: 920px; margin: 0 auto; padding: 0 20px 120px; }
+
+    /* Filter card */
+    .filter-card {
+      background: var(--white); border:1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      box-shadow: var(--shadow); margin-bottom: 28px;
+    }
+    .filter-card h2 { font-family:'Playfair Display',serif; font-size:1.2rem; margin-bottom:4px; color:var(--navy); }
+    .filter-card .sub { font-size:.85rem; color:var(--ink-soft); margin-bottom:20px; }
+    .filter-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; }
+    .filter-group label { display:block; font-size:.75rem; font-weight:600; color:var(--ink-mid); text-transform:uppercase; letter-spacing:.07em; margin-bottom:6px; }
+    select {
+      width:100%; padding:10px 14px; border:1.5px solid var(--border);
+      border-radius:8px; font-family:inherit; font-size:.93rem;
+      background:var(--bg); color:var(--ink); cursor:pointer; appearance:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat:no-repeat; background-position:right 12px center;
+    }
+    select:focus { outline:none; border-color:var(--rust); }
+    .filter-actions { display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
+    .btn-primary { background:var(--rust); color:#fff; border:none; padding:11px 26px; border-radius:8px; font-family:inherit; font-size:.95rem; font-weight:600; cursor:pointer; transition:background .15s; }
+    .btn-primary:hover { background:var(--rust-mid); }
+    .btn-ghost { background:transparent; color:var(--ink-soft); border:1.5px solid var(--border); padding:11px 20px; border-radius:8px; font-family:inherit; font-size:.95rem; cursor:pointer; transition:all .15s; }
+    .btn-ghost:hover { border-color:var(--ink-soft); color:var(--ink); }
+
+    /* Results */
+    .results-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:14px; }
+    .results-header h2 { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--navy); }
+    .results-count { font-size:.85rem; color:var(--ink-soft); }
+
+    .tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+    .tab { padding:6px 15px; border-radius:20px; border:1.5px solid var(--border); background:var(--white); font-size:.82rem; font-weight:600; cursor:pointer; color:var(--ink-mid); transition:all .15s; font-family:inherit; }
+    .tab.active, .tab:hover { background:var(--navy); border-color:var(--navy); color:#fff; }
+
+    .empty-state { text-align:center; padding:40px 20px; color:var(--ink-soft); border:1.5px dashed var(--border); border-radius:var(--radius); }
+    .resource-grid { display:grid; gap:14px; }
+
+    .card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:20px 22px; box-shadow:0 1px 6px rgba(0,0,0,.04); transition:box-shadow .15s, transform .1s; }
+    .card:hover { box-shadow:var(--shadow); transform:translateY(-1px); }
+    .card-header { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; flex-wrap:wrap; }
+    .card-name { font-weight:600; font-size:1rem; color:var(--navy); }
+    .badge { font-size:.7rem; font-weight:700; padding:3px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:.05em; white-space:nowrap; }
+    .badge-food        { background:#e8f5e9; color:#2e7d32; }
+    .badge-housing     { background:#e3f2fd; color:#1565c0; }
+    .badge-health      { background:#fce4ec; color:#ad1457; }
+    .badge-mental      { background:#f3e5f5; color:#6a1b9a; }
+    .badge-immigration { background:#fff8e1; color:#e65100; }
+    .badge-family      { background:#e8eaf6; color:#283593; }
+    .badge-safety      { background:#fbe9e7; color:#bf360c; }
+    .badge-seniors     { background:#e0f7fa; color:#006064; }
+    .badge-veterans    { background:#f1f8e9; color:#33691e; }
+
+    .card-desc { font-size:.9rem; color:var(--ink-soft); margin:8px 0 10px; }
+    .card-meta { display:flex; gap:14px; flex-wrap:wrap; font-size:.82rem; color:var(--ink-soft); }
+    .card-actions { margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .card-link { font-size:.82rem; font-weight:600; padding:5px 13px; border-radius:6px; text-decoration:none; border:1.5px solid var(--border); color:var(--rust); transition:all .15s; background:none; cursor:pointer; font-family:inherit; }
+    .card-link:hover { background:var(--rust-lt); border-color:var(--rust); }
+    .card-link.phone { color:var(--ink-mid); }
+    .card-langs { font-size:.73rem; color:var(--ink-soft); background:var(--bg); padding:3px 9px; border-radius:10px; border:1px solid var(--border); }
+
+    /* Report btn */
+    #report-btn {
+      position:fixed; bottom:24px; right:24px; z-index:200;
+      background:var(--rust); color:#fff; border:none;
+      padding:11px 18px; border-radius:40px; font-family:inherit;
+      font-size:.85rem; font-weight:700; cursor:pointer;
+      box-shadow:0 4px 16px rgba(192,57,43,.45);
+      transition:background .15s, transform .1s;
+      display:flex; align-items:center; gap:7px;
+    }
+    #report-btn:hover { background:var(--rust-mid); transform:scale(1.03); }
+
+    /* Modal */
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:300; align-items:center; justify-content:center; padding:20px; }
+    .modal-overlay.open { display:flex; }
+    .modal { background:var(--white); border-radius:14px; padding:32px; max-width:500px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,.25); position:relative; max-height:90vh; overflow-y:auto; }
+    .modal h2 { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--navy); margin-bottom:6px; }
+    .modal .sub { font-size:.85rem; color:var(--ink-soft); margin-bottom:20px; }
+    .modal label { display:block; font-size:.75rem; font-weight:700; color:var(--ink-mid); text-transform:uppercase; letter-spacing:.07em; margin-bottom:5px; margin-top:14px; }
+    .modal input, .modal select, .modal textarea { width:100%; padding:10px 14px; border:1.5px solid var(--border); border-radius:8px; font-family:inherit; font-size:.93rem; background:var(--bg); color:var(--ink); }
+    .modal textarea { min-height:90px; resize:vertical; }
+    .modal input:focus, .modal select:focus, .modal textarea:focus { outline:none; border-color:var(--rust); }
+    .modal-actions { display:flex; gap:10px; margin-top:20px; justify-content:flex-end; }
+    .modal-close { position:absolute; top:14px; right:18px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--ink-soft); line-height:1; }
+    .form-success { display:none; text-align:center; padding:20px 0; }
+    .form-success .check { font-size:2.5rem; margin-bottom:10px; }
+    .form-error-msg { display:none; color:var(--rust); font-size:.85rem; margin-top:8px; }
+
+    /* Footer */
+    footer { background:var(--navy); color:rgba(255,255,255,.65); text-align:center; padding:30px 24px; font-size:.84rem; margin-top:40px; }
+    footer p + p { margin-top:6px; }
+    footer strong { color:#fff; }
+    footer a { color:var(--gold); }
+
+    @media(max-width:520px) {
+      .filter-grid { grid-template-columns:1fr; }
+      main { padding:0 16px 100px; }
+    }
+  </style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+
+<header>
+  <div class="logo">Houston <span>Care</span> Connect</div>
+  <div class="lang-btns">
+    <button class="lang-btn active" onclick="setLang('en')">English</button>
+    <button class="lang-btn" onclick="setLang('es')">Español</button>
+  </div>
+</header>
+
+<div class="hero-wrap">
+  <h1>Find help in <em>Houston.</em></h1>
+  <p>Free. Bilingual. Built for Harris County. Three quick questions and we'll show you the right resources — no account, no judgment.</p>
+</div>
+
+</div>
+
+<main id="main">
+  <section class="filter-card" aria-label="Filter resources">
+    <h2>Three quick questions</h2>
+    <p class="sub">Tres preguntas rápidas — tell us a little so we can show what's most relevant.</p>
+    <div class="filter-grid">
+      <div class="filter-group">
+        <label for="sel-need">What do you need most?</label>
+        <select id="sel-need">
+          <option value="">Show me everything</option>
+          <option value="food">Food</option>
+          <option value="housing">Housing / Shelter</option>
+          <option value="health">Healthcare</option>
+          <option value="mental">Mental health</option>
+          <option value="immigration">Immigration / Legal</option>
+          <option value="family">Family / Kids</option>
+          <option value="safety">Safety / Domestic violence</option>
+          <option value="seniors">Senior services</option>
+          <option value="veterans">Veterans</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="sel-area">What part of Houston?</label>
+        <select id="sel-area">
+          <option value="">Anywhere in Houston</option>
+          <option value="downtown">Downtown / Midtown</option>
+          <option value="north">North Houston / Greenspoint</option>
+          <option value="east">East Houston / Galena Park</option>
+          <option value="southwest">Southwest Houston</option>
+          <option value="west">West Houston / Westheimer</option>
+          <option value="southeast">Southeast Houston</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="sel-lang">Preferred language?</label>
+        <select id="sel-lang">
+          <option value="">Any</option>
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="zh">中文</option>
+          <option value="ar">Arabic / العربية</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter-actions">
+      <button class="btn-primary" onclick="applyFilters()">Show me resources</button>
+      <button class="btn-ghost" onclick="clearFilters()">Clear</button>
+    </div>
+  </section>
+
+  <section id="results-section" aria-label="Resources">
+    <div class="results-header">
+      <h2>Results</h2>
+      <span class="results-count" id="results-count"></span>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-cat="" onclick="filterTab(this,'')">All</button>
+      <button class="tab" data-cat="food" onclick="filterTab(this,'food')">🍎 Food</button>
+      <button class="tab" data-cat="housing" onclick="filterTab(this,'housing')">🏠 Housing</button>
+      <button class="tab" data-cat="health" onclick="filterTab(this,'health')">🏥 Health</button>
+      <button class="tab" data-cat="mental" onclick="filterTab(this,'mental')">🧠 Mental health</button>
+      <button class="tab" data-cat="immigration" onclick="filterTab(this,'immigration')">🌎 Immigration</button>
+      <button class="tab" data-cat="family" onclick="filterTab(this,'family')">👨‍👩‍👧 Family</button>
+      <button class="tab" data-cat="safety" onclick="filterTab(this,'safety')">🛡️ DV / Safety</button>
+      <button class="tab" data-cat="seniors" onclick="filterTab(this,'seniors')">👴 Seniors</button>
+      <button class="tab" data-cat="veterans" onclick="filterTab(this,'veterans')">🎖️ Veterans</button>
+    </div>
+    <div id="results-grid" class="resource-grid"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Houston Care Connect — built by Ananya Bharathapudi. A free community tool. Not affiliated with the City of Houston.</p>
+  <p>If you're in immediate danger, call <strong>911</strong>. For 24/7 help, call <strong>211</strong> or visit <a href="https://www.211texas.org" target="_blank" rel="noopener">211 Texas</a>.</p>
+  <p>Found an error? Use the red button or email <a href="mailto:ananyabvs@gmail.com">ananyabvs@gmail.com</a>.</p>
+</footer>
+
+<button id="report-btn" onclick="openModal()" aria-haspopup="dialog">⚠️ Report an error / Reportar</button>
+
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">×</button>
+    <h2 id="modal-title">Report an error</h2>
+    <p class="sub">Help us keep this directory accurate. / Ayúdanos a mantenerlo preciso.</p>
+    <div id="modal-form-body">
+      <form id="error-form" action="https://formspree.io/f/mvzykqvd" method="POST">
+        <label for="err-type">What's wrong?</label>
+        <select id="err-type" name="issue_type" required>
+          <option value="">— select —</option>
+          <option value="Phone number wrong">Phone number wrong</option>
+          <option value="Place is closed">Place is closed</option>
+          <option value="Hours wrong">Hours wrong</option>
+          <option value="Language info wrong">Language info wrong</option>
+          <option value="A resource is missing">A resource is missing</option>
+          <option value="Other">Other</option>
+        </select>
+        <label for="err-resource">Which resource?</label>
+        <input type="text" id="err-resource" name="resource_name" placeholder="Name of the resource..." />
+        <label for="err-detail">Details</label>
+        <textarea id="err-detail" name="details" placeholder="Tell us what's wrong..."></textarea>
+        <label for="err-email">Your email (optional)</label>
+        <input type="email" id="err-email" name="_replyto" placeholder="you@example.com" />
+        <input type="text" name="_gotcha" style="display:none" />
+        <p class="form-error-msg" id="form-err-msg">Something went wrong. Please email <a href="mailto:ananyabvs@gmail.com">ananyabvs@gmail.com</a> directly.</p>
+        <div class="modal-actions">
+          <button type="button" class="btn-ghost" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Send report</button>
+        </div>
+      </form>
+    </div>
+    <div class="form-success" id="form-success">
+      <div class="check">✓</div>
+      <p><strong>Thank you — report sent.</strong></p>
+      <p style="margin-top:6px;color:#6b7280;font-size:.9rem;">We review all reports and update the directory regularly.</p>
+      <div class="modal-actions" style="justify-content:center;margin-top:18px;">
+        <button class="btn-ghost" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const RESOURCES = [
+
+  // FOOD
+  { id:"houston-food-bank", name:"Houston Food Bank", cat:"food", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es"], desc:"Largest food bank in the US by distribution volume. Serves 1M+ residents through 1,500+ community partners. Call or visit website to find your nearest distribution site.", phone:"(713) 223-3700", website:"https://www.houstonfoodbank.org", hours:"Mon–Fri 8am–5pm; distribution sites vary" },
+  { id:"bakerripley-food", name:"BakerRipley — Food Fairs & Pantry", cat:"food", areas:["east","southwest","southeast","north"], langs:["en","es"], desc:"Free food fairs across Harris County with no income verification required. Also operates neighborhood centers with emergency food assistance.", phone:"(713) 957-1947", website:"https://bakerripley.org", hours:"Food fairs vary by location — check website" },
+  { id:"bread-of-life", name:"Bread of Life — Food Pantry", cat:"food", areas:["downtown"], langs:["en","es"], desc:"Emergency food pantry and hot meals for unhoused and food-insecure Houstonians. No appointment needed for pantry. Also provides clothing and shelter assistance.", phone:"(713) 529-0037", website:"https://breadoflifehouston.org", hours:"Mon–Fri 9am–3pm" },
+  { id:"target-hunger", name:"Target Hunger", cat:"food", areas:["north","east","southwest"], langs:["en","es"], desc:"One of Houston's largest nonprofits focused solely on hunger. Mobile pantries, brick-and-mortar locations, home delivery for homebound residents, and food fairs. Served 25,000+ individuals in 2025.", phone:"(713) 977-5678", website:"https://www.targethunger.org", hours:"Mon–Sat; varies by site" },
+  { id:"northwest-ministries-food", name:"Northwest Assistance Ministries — Nutrition Center", cat:"food", areas:["north","west"], langs:["en","es"], desc:"Free grocery-store-style pantry in North Houston. Clients shop for their own items — no pre-packed boxes. Serves 77041, 77084, 77095, 77433, 77449 zip codes.", phone:"(281) 885-4600", website:"https://www.namonline.org", hours:"Tue–Thu 9am–12pm; Sat 8:30–11am" },
+  { id:"the-beacon", name:"The Beacon — Meals & Services", cat:"food", areas:["downtown"], langs:["en","es"], desc:"Downtown nonprofit providing free breakfast and lunch daily. Also connects individuals to shelter, healthcare, and social services. Open to all regardless of housing status.", phone:"(713) 228-1460", website:"https://www.thebeaconhouston.org", hours:"Mon–Fri 7am–1pm" },
+  { id:"catholic-charities-food", name:"Catholic Charities — Food Distribution", cat:"food", areas:["downtown","southwest","north","east"], langs:["en","es"], desc:"Regular food distributions across Harris County. Registration required for some sites. Call or visit website for upcoming distribution dates and locations.", phone:"(713) 526-4611", website:"https://catholiccharities.org", hours:"Multiple sites weekly — see website" },
+  { id:"snap-benefits", name:"SNAP Benefits — Texas HHS", cat:"food", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es","vi","zh","ar"], desc:"Federal nutrition program providing monthly benefits for groceries. Apply online or in person. Over 640,000 Harris County residents currently enrolled. Eligibility based on income.", phone:"(877) 541-7905", website:"https://www.hhs.texas.gov/snap", hours:"Applications: Mon–Fri 8am–5pm" },
+  { id:"wic-harris", name:"WIC — Women, Infants & Children (Harris County)", cat:"food", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es","vi"], desc:"Free nutrition program for pregnant women, new mothers, and children under 5. Provides food vouchers, breastfeeding support, and health referrals.", phone:"(832) 393-5080", website:"https://www.harriscountypublichealth.org/wic", hours:"Mon–Fri 8am–5pm; multiple clinic locations" },
+  { id:"houston-mow", name:"Meals on Wheels — Houston", cat:"food", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es"], desc:"Home-delivered meals for homebound seniors and adults with disabilities. Also offers wellness checks, safety assessments, and minor home repairs.", phone:"(713) 923-6405", website:"https://www.mealsonwheelshouston.org", hours:"Mon–Fri delivery; applications Mon–Fri 8am–5pm" },
+
+  // HOUSING
+  { id:"coalition-homeless", name:"Coalition for the Homeless — The Way Home", cat:"housing", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es"], desc:"Houston's coordinated entry system for homeless services. Single point of access to emergency shelter, transitional housing, and permanent supportive housing across Harris County.", phone:"(713) 739-7514", website:"https://www.cfthhouston.org", hours:"Mon–Fri 9am–5pm" },
+  { id:"search-homeless", name:"SEARCH Homeless Services", cat:"housing", areas:["downtown","east"], langs:["en","es"], desc:"Street outreach, day shelter, housing navigation, and employment services for unhoused individuals. Bilingual staff. Part of the city's End Street Homelessness Initiative.", phone:"(713) 739-7752", website:"https://www.searchhomeless.org", hours:"Mon–Fri 8am–4pm; outreach daily" },
+  { id:"star-of-hope", name:"Star of Hope Mission", cat:"housing", areas:["downtown","east"], langs:["en","es"], desc:"Emergency shelter for men and women, transitional housing, and life-skills programs. No reservation required for emergency shelter — walk in. 1,000+ beds across two campuses.", phone:"(713) 227-8900", website:"https://www.sohmission.org", hours:"24/7 emergency shelter" },
+  { id:"harmony-house", name:"Harmony House", cat:"housing", areas:["southeast","east"], langs:["en","es"], desc:"Transitional housing and supportive services for individuals with mental illness who are homeless or at risk. Partners with Harris Center for wraparound care.", phone:"(713) 956-5008", website:"https://harmonyhousetx.org", hours:"Mon–Fri 8am–5pm" },
+  { id:"hha-vouchers", name:"Houston Housing Authority — Section 8 Vouchers", cat:"housing", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es","vi"], desc:"Housing Choice Vouchers (Section 8) help income-eligible households afford private market rentals. HHA pays a portion of rent directly to landlord. Waitlist opens periodically.", phone:"(713) 260-0500", website:"https://www.housingforhouston.com", hours:"Mon–Fri 8am–5pm" },
+  { id:"avenue-cdc", name:"Avenue CDC — Affordable Housing", cat:"housing", areas:["north","west"], langs:["en","es"], desc:"Community development organization building affordable homeownership and rental housing in North and Greater Houston. Down payment assistance for first-time buyers.", phone:"(713) 864-8228", website:"https://www.avenuecdc.org", hours:"Mon–Fri 9am–5pm" },
+  { id:"hcd-rental-assist", name:"City of Houston — Emergency Rental Assistance", cat:"housing", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es","vi","ar"], desc:"Emergency rental and utility assistance for Houston renters facing eviction or utility shutoff. Income-based eligibility. Apply through Houston Housing and Community Development.", phone:"(832) 394-6200", website:"https://houstontx.gov/housing", hours:"Mon–Fri 8am–5pm" },
+  { id:"interfaith-ministries-housing", name:"Interfaith Ministries for Greater Houston", cat:"housing", areas:["downtown","southwest","north"], langs:["en","es","vi","ar"], desc:"Housing stability services including utility assistance, emergency rent, and refugee resettlement. Serves over 90,000 residents annually.", phone:"(713) 533-4900", website:"https://www.imgh.org", hours:"Mon–Fri 8:30am–4:30pm" },
+
+  // HEALTH
+  { id:"legacy-health", name:"Legacy Community Health", cat:"health", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es","vi"], desc:"Largest FQHC in Houston. 50+ clinic locations offering primary care, dental, vision, behavioral health, OB/GYN, and HIV care. Sliding-scale fees. Medi-caid/uninsured accepted.", phone:"(832) 548-5000", website:"https://www.legacycommunityhealth.org", hours:"Mon–Fri 8am–6pm; some Sat" },
+  { id:"harris-health", name:"Harris Health System — Clinics & Ben Taub Hospital", cat:"health", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es","vi","zh","ar"], desc:"County health system serving uninsured and low-income Harris County residents. Ben Taub is a Level I trauma center. Gold Card program for those who qualify based on income.", phone:"(713) 634-1000", website:"https://www.harrishealth.org", hours:"24/7 emergency; clinics Mon–Fri 8am–5pm" },
+  { id:"bpsos-health", name:"Boat People SOS (BPSOS) — Health Programs", cat:"health", areas:["southeast","east"], langs:["en","vi","zh"], desc:"Cancer screenings, ACA/Medicaid enrollment, mobile wellness clinics for Vietnamese and AAPI communities in Southeast Houston. Second Wednesday monthly wellness screening.", phone:"(281) 530-6888", website:"https://bpsos.org/texas", hours:"Mon–Fri 9am–5pm" },
+  { id:"houston-health-dept", name:"Houston Health Department — Clinics", cat:"health", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es","vi","ar"], desc:"Free and low-cost immunizations, STI testing, TB screening, family planning, and flu vaccines at multiple neighborhood clinics across Houston.", phone:"(832) 393-5080", website:"https://www.houstontx.gov/health", hours:"Mon–Fri 8am–4:30pm" },
+  { id:"memorial-hermann-charity", name:"Memorial Hermann — Charity Care Program", cat:"health", areas:["west","north","southeast"], langs:["en","es"], desc:"Uninsured and underinsured patients may qualify for free or reduced-cost care at Memorial Hermann hospitals. Apply through financial counselors at any campus.", phone:"(713) 704-4000", website:"https://www.memorialhermann.org", hours:"24/7 emergency; charity applications Mon–Fri" },
+  { id:"planned-parenthood-hou", name:"Planned Parenthood — Houston", cat:"health", areas:["downtown","southwest","west"], langs:["en","es"], desc:"Reproductive healthcare, birth control, STI testing and treatment, gender-affirming care, and pregnancy services. Sliding-scale fees. Medicaid accepted.", phone:"(713) 522-3976", website:"https://www.plannedparenthood.org/planned-parenthood-gulf-coast", hours:"Mon–Sat 8am–5pm" },
+  { id:"cristo-rey-health", name:"Cristo Rey — Health Clinic", cat:"health", areas:["east","southeast"], langs:["en","es"], desc:"Low-cost primary care, chronic disease management, and preventive care for uninsured East Houston residents. Bilingual staff. Sliding-scale fees.", phone:"(713) 921-7520", website:"https://cristorey.net", hours:"Mon–Fri 8am–5pm" },
+
+  // MENTAL HEALTH
+  { id:"harris-center", name:"The Harris Center for Mental Health and IDD", cat:"mental", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es","vi"], desc:"County's designated local mental health authority. Crisis hotline, outpatient therapy, psychiatric medication management, PATH program for homeless individuals, and IDD services.", phone:"(713) 970-7000", website:"https://www.theharriscenter.org", hours:"24/7 crisis line; offices Mon–Fri 8am–5pm" },
+  { id:"houston-recovery-center", name:"Houston Recovery Center", cat:"mental", areas:["downtown"], langs:["en","es"], desc:"Low-barrier substance use treatment, mental health services, and peer support. Walk-in accepted. Part of the city's End Street Homelessness Initiative for co-occurring disorders.", phone:"(832) 393-7000", website:"https://www.houstontx.gov/recovercenter", hours:"Mon–Fri 7am–10pm; Sat–Sun 9am–5pm" },
+  { id:"nami-houston", name:"NAMI Greater Houston", cat:"mental", areas:["downtown","west","north"], langs:["en","es"], desc:"Free mental health education, peer-to-peer support groups, family support groups (NAMI Family-to-Family), and crisis navigation. No cost to participate.", phone:"(713) 523-8963", website:"https://namigreaterhouston.org", hours:"Mon–Fri 9am–5pm; support groups weekly" },
+  { id:"menniger-outpatient", name:"Menninger Clinic — Outpatient & Community Programs", cat:"mental", areas:["west"], langs:["en","es"], desc:"Specialized outpatient mental health treatment for depression, anxiety, PTSD, and personality disorders. Sliding-scale and sliding-fee options. Referrals accepted.", phone:"(713) 275-5000", website:"https://www.menningerclinic.org", hours:"Mon–Fri 8am–5pm" },
+  { id:"bay-area-council-mh", name:"Star of Hope — Behavioral Health", cat:"mental", areas:["downtown","east"], langs:["en","es"], desc:"On-site mental health counseling and substance use support for shelter residents and community members. No insurance required.", phone:"(713) 227-8900", website:"https://www.sohmission.org", hours:"Mon–Fri 8am–5pm" },
+  { id:"legacy-behavioral", name:"Legacy Community Health — Behavioral Health", cat:"mental", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es","vi"], desc:"Integrated behavioral health services at primary care clinics. Individual therapy, psychiatry, and counseling. Sliding-scale fees. Same-day referrals from primary care.", phone:"(832) 548-5000", website:"https://www.legacycommunityhealth.org/behavioral-health", hours:"Mon–Fri 8am–5pm" },
+  { id:"texas-crisis-line", name:"Texas Mental Health Crisis Line — 988", cat:"mental", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es","vi","zh","ar"], desc:"Call or text 988 anytime for free, confidential mental health crisis support. Available 24/7 in multiple languages. Connects to local crisis counselors and mobile teams.", phone:"988", website:"https://988lifeline.org", hours:"24/7 — call or text anytime" },
+
+  // IMMIGRATION & LEGAL
+  { id:"hilsc", name:"Houston Immigration Legal Services Collaborative (HILSC)", cat:"immigration", areas:["downtown","southwest","east"], langs:["en","es","vi","ar"], desc:"Free immigration rights hotline staffed by volunteer attorneys. Referrals to legal services organizations for DACA, asylum, green cards, and deportation defense.", phone:"(713) 776-4700", website:"https://houstonimmigration.org", hours:"Hotline Mon–Fri 9am–5pm" },
+  { id:"catholic-charities-imm", name:"Catholic Charities — St. Frances Cabrini Center", cat:"immigration", areas:["downtown","southwest"], langs:["en","es","vi","ar"], desc:"Free immigration legal services for low-income immigrants and refugees: DACA, family petitions, naturalization, asylum, U/T visas, and green cards.", phone:"(713) 526-4611", website:"https://catholiccharities.org/immigration", hours:"Mon–Fri 9am–5pm" },
+  { id:"ymca-international", name:"YMCA International Services", cat:"immigration", areas:["west","southwest"], langs:["en","es","vi","ar"], desc:"Legal counseling, representation, ESL classes, employment services, and refugee resettlement for immigrants in Greater Houston.", phone:"(713) 339-9015", website:"https://www.ymcahouston.org/international-services", hours:"Mon–Fri 8am–5pm" },
+  { id:"uh-immigration-clinic", name:"UH Law Center Immigration Clinic", cat:"immigration", areas:["east","southeast"], langs:["en","es"], desc:"Free immigration legal services provided by law students under attorney supervision. DACA, family petitions, removal defense, and asylum.", phone:"(713) 743-2094", website:"https://www.law.uh.edu/clinics/immigration", hours:"Mon–Fri 9am–5pm (by appointment)" },
+  { id:"tahirih-houston", name:"Tahirih Justice Center — Houston", cat:"immigration", areas:["downtown","southwest"], langs:["en","es","vi","ar"], desc:"Free legal and social services for immigrant women, girls, and all genders who have survived gender-based violence. Asylum, VAWA, U/T visas, and family reunification.", phone:"(713) 481-3643", website:"https://www.tahirih.org/offices/houston", hours:"Mon–Fri 9am–5pm" },
+  { id:"bpsos-legal", name:"Boat People SOS (BPSOS) — Legal Services", cat:"immigration", areas:["southeast","east"], langs:["en","vi","zh"], desc:"Free immigration legal services, ESL classes, citizenship preparation, and advocacy for Vietnamese and AAPI communities in Houston.", phone:"(281) 530-6888", website:"https://bpsos.org/texas", hours:"Mon–Fri 9am–5pm" },
+  { id:"lone-star-legal", name:"Lone Star Legal Aid", cat:"immigration", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es"], desc:"Free civil legal services for low-income Houstonians including immigration, housing, family law, and consumer rights. Largest legal aid organization in Houston.", phone:"(713) 652-0077", website:"https://www.lonestarlegal.org", hours:"Mon–Fri 9am–5pm; intake hotline 8:30am" },
+
+  // FAMILY & KIDS
+  { id:"bakerripley-family", name:"BakerRipley — Family & Children Services", cat:"family", areas:["east","southwest","southeast","north"], langs:["en","es","vi"], desc:"Head Start, early childhood education, after-school programs, workforce development, and emergency financial assistance for Houston families.", phone:"(713) 957-1947", website:"https://bakerripley.org", hours:"Mon–Fri 8am–5pm" },
+  { id:"houston-food-bank-kids", name:"Houston Food Bank — Kids Cafe", cat:"family", areas:["north","east","southwest","southeast"], langs:["en","es"], desc:"Free after-school meals and weekend BackPack Program for food-insecure children. Partners with schools and community sites across Harris County.", phone:"(713) 223-3700", website:"https://www.houstonfoodbank.org/kids", hours:"After-school weekdays; BackPack Fridays" },
+  { id:"kids-meals", name:"Kids' Meals Inc.", cat:"family", areas:["north","east","southwest","west","southeast"], langs:["en","es"], desc:"Free home delivery of healthy meals for Houston's youngest food-insecure children under 5. No cost, no income verification. Covers all Houston zip codes.", phone:"(713) 695-7999", website:"https://kidsmealshouston.org", hours:"Mon–Fri deliveries; intake Mon–Fri 9am–5pm" },
+  { id:"childrens-defense-fund", name:"DePelchin Children's Center", cat:"family", areas:["downtown","west","north"], langs:["en","es"], desc:"Foster care support, mental health services for children, early childhood programs, and family preservation services across Harris County.", phone:"(713) 730-2335", website:"https://www.depelchin.org", hours:"Mon–Fri 8am–5pm" },
+  { id:"houston-area-women-center", name:"Houston Area Women's Center — Family Services", cat:"family", areas:["downtown","southwest"], langs:["en","es","vi","ar"], desc:"Crisis counseling, family therapy, legal services, and economic empowerment for women and families experiencing domestic violence or crisis.", phone:"(713) 528-6798", website:"https://www.hawc.org", hours:"Mon–Fri 9am–5pm; 24/7 crisis hotline" },
+  { id:"interfaith-family", name:"Interfaith Ministries — Family Services", cat:"family", areas:["downtown","southwest","north"], langs:["en","es","vi","ar"], desc:"Refugee family services, senior companion programs, hunger relief, and emergency financial assistance for Houston families of all backgrounds.", phone:"(713) 533-4900", website:"https://www.imgh.org", hours:"Mon–Fri 8:30am–4:30pm" },
+
+  // DOMESTIC VIOLENCE & SAFETY
+  { id:"hawc-dv", name:"Houston Area Women's Center — DV Hotline & Shelter", cat:"safety", areas:["downtown","southwest","north","east","west","southeast"], langs:["en","es","vi","ar"], desc:"24/7 crisis hotline, emergency shelter, legal advocacy, counseling, and transitional housing for DV survivors. Bilingual staff. Confidential location.", phone:"(713) 528-2121", website:"https://www.hawc.org", hours:"24/7 hotline; shelter intake 24/7" },
+  { id:"bridge-troubled-waters", name:"The Bridge Over Troubled Waters", cat:"safety", areas:["southeast","east"], langs:["en","es"], desc:"Emergency shelter, transitional housing, court advocacy, and counseling for domestic violence survivors in the Pasadena/Southeast Houston area.", phone:"(713) 473-2801", website:"https://www.thebridge-houston.org", hours:"24/7 crisis line" },
+  { id:"northwest-dv", name:"Northwest Assistance Ministries — DV Program", cat:"safety", areas:["north","west"], langs:["en","es"], desc:"DV counseling, legal referrals, emergency shelter coordination, and safety planning for survivors in North and Northwest Houston.", phone:"(281) 885-4673", website:"https://www.namonline.org", hours:"Mon–Fri 9am–5pm; crisis line 24/7" },
+  { id:"familytime", name:"FamilyTime Crisis and Counseling Center", cat:"safety", areas:["north"], langs:["en","es"], desc:"DV shelter, sexual assault services, crisis counseling, legal advocacy, and children's programs for survivors in North Harris County.", phone:"(281) 446-2615", website:"https://familytimeccc.org", hours:"24/7 crisis line and shelter" },
+  { id:"lone-star-dv", name:"Lone Star Legal Aid — DV Legal Services", cat:"safety", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es"], desc:"Free legal representation for DV survivors: protective orders, divorce, child custody, immigration relief (VAWA, U-Visa), and housing rights.", phone:"(713) 652-0077", website:"https://www.lonestarlegal.org/dv", hours:"Mon–Fri 9am–5pm" },
+
+  // SENIORS
+  { id:"harris-aaa", name:"Harris County Area Agency on Aging", cat:"seniors", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es","vi","zh","ar"], desc:"Coordinates senior services countywide: Meals on Wheels, caregiver support, in-home services, benefits counseling, adult protective services, and senior center programs.", phone:"(832) 393-4301", website:"https://www.hcaaa.org", hours:"Mon–Fri 8am–5pm" },
+  { id:"houston-senior-centers", name:"City of Houston — Senior Centers Network", cat:"seniors", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es","vi","ar"], desc:"Dozens of senior centers offering meals, fitness, arts, social activities, transportation coordination, and health screenings across all Houston neighborhoods.", phone:"(832) 393-0954", website:"https://www.houstontx.gov/parks/seniorcitizens", hours:"Mon–Fri 8am–5pm; varies by location" },
+  { id:"mow-houston", name:"Meals on Wheels Houston", cat:"seniors", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es"], desc:"Free home-delivered meals, wellness checks, and safety assessments for homebound seniors. Also provides minor home repairs and financial assistance.", phone:"(713) 923-6405", website:"https://www.mealsonwheelshouston.org", hours:"Mon–Fri delivery" },
+  { id:"senior-legal-advocate", name:"Advocate Senior Legal Center", cat:"seniors", areas:["downtown","east"], langs:["en","es"], desc:"Free civil legal services for seniors 60+: housing rights, consumer fraud, advance directives, benefits access, and guardianship matters.", phone:"(832) 393-4074", website:"https://www.harriscountytx.gov", hours:"Mon–Fri 9am–4pm" },
+  { id:"bpsos-seniors", name:"Boat People SOS — Senior Services", cat:"seniors", areas:["southeast","east"], langs:["en","vi","zh"], desc:"Senior wellness programs, Medicare/Medicaid enrollment help, ESL classes, and civic engagement for Vietnamese and AAPI seniors in Houston.", phone:"(281) 530-6888", website:"https://bpsos.org/texas", hours:"Mon–Fri 9am–5pm" },
+
+  // VETERANS
+  { id:"usvets-houston", name:"U.S.VETS — Houston", cat:"veterans", areas:["downtown","east"], langs:["en","es"], desc:"Largest nonprofit veteran-specific housing and services provider in Houston. Emergency and transitional housing, mental health care, employment, and benefits navigation.", phone:"(713) 224-4060", website:"https://usvets.org/locations/houston", hours:"Mon–Fri 8am–5pm; housing 24/7" },
+  { id:"va-houston", name:"Michael E. DeBakey VA Medical Center", cat:"veterans", areas:["west"], langs:["en","es","vi"], desc:"Full-service VA hospital offering primary care, mental health, substance use treatment, and specialty care for eligible veterans. Also has community-based outpatient clinics.", phone:"(713) 791-1414", website:"https://www.houston.va.gov", hours:"24/7 emergency; clinics Mon–Fri 8am–4:30pm" },
+  { id:"coalition-vet", name:"Coalition for the Homeless — Veterans Programs (HUD-VASH)", cat:"veterans", areas:["downtown","north","east","southwest","west","southeast"], langs:["en","es"], desc:"HUD-VASH vouchers provide permanent housing for homeless veterans. Coordinated through the VA and Coalition for the Homeless. Contact VA or CFTH to start the process.", phone:"(713) 739-7514", website:"https://www.cfthhouston.org/veterans", hours:"Mon–Fri 9am–5pm" },
+  { id:"hba-veterans", name:"Houston Bar Association — Veterans Legal Initiative", cat:"veterans", areas:["downtown"], langs:["en","es"], desc:"Free legal help for veterans: benefits claims, discharge upgrades, housing, family law, and consumer issues. Same intake form as Houston Volunteer Lawyers.", phone:"(713) 228-0735", website:"https://www.hbavolunteerlawyers.org", hours:"Clinics 1st and 3rd Wed noon–4pm; walk-in" }
+
+];
+
+// State
+let activeNeed="", activeArea="", activeLang="", activeCat="";
+
+function gcTrack(path, title) {
+  if (window.goatcounter && window.goatcounter.count)
+    window.goatcounter.count({ path, title });
+}
+
+function badgeLabel(cat) {
+  return {food:"Food",housing:"Housing",health:"Health",mental:"Mental Health",immigration:"Immigration",family:"Family",safety:"DV / Safety",seniors:"Seniors",veterans:"Veterans"}[cat] || cat;
+}
+
+function langLabel(l) {
+  return {en:"EN",es:"ES",vi:"VI",zh:"中",ar:"AR"}[l] || l.toUpperCase();
+}
+
+function render(resources) {
+  const grid = document.getElementById("results-grid");
+  document.getElementById("results-count").textContent = resources.length
+    ? `${resources.length} resource${resources.length===1?'':'s'} found`
+    : "";
+  if (!resources.length) {
+    grid.innerHTML = `<div class="empty-state"><p>No matches with these filters. Try fewer filters, or call <strong>211</strong> (free, 24/7, multilingual) — they can help directly.</p></div>`;
+    return;
+  }
+  grid.innerHTML = resources.map(r => `
+    <div class="card" id="card-${r.id}">
+      <div class="card-header">
+        <span class="card-name">${r.name}</span>
+        <span class="badge badge-${r.cat}">${badgeLabel(r.cat)}</span>
+      </div>
+      <p class="card-desc">${r.desc}</p>
+      <div class="card-meta">
+        ${r.hours ? `<span>🕐 ${r.hours}</span>` : ''}
+        ${r.phone ? `<span>📞 ${r.phone}</span>` : ''}
+      </div>
+      <div class="card-actions">
+        ${r.phone ? `<a class="card-link phone" href="tel:${r.phone.replace(/\D/g,'')}" onclick="gcTrack('resource-call/${r.id}','Call: ${r.name}')">📞 Call</a>` : ''}
+        ${r.website ? `<a class="card-link" href="${r.website}" target="_blank" rel="noopener" onclick="gcTrack('resource-visit/${r.id}','Visit: ${r.name}')">Website →</a>` : ''}
+        <span class="card-langs">${r.langs.map(langLabel).join(' · ')}</span>
+        <button class="card-link" onclick="openReportFor('${r.name.replace(/'/g,"\\'")}')">Report error</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function getFiltered() {
+  return RESOURCES.filter(r => {
+    if (activeNeed && r.cat !== activeNeed) return false;
+    if (activeArea && !r.areas.includes(activeArea)) return false;
+    if (activeLang && !r.langs.includes(activeLang)) return false;
+    if (activeCat && r.cat !== activeCat) return false;
+    return true;
+  });
+}
+
+function applyFilters() {
+  activeNeed = document.getElementById('sel-need').value;
+  activeArea = document.getElementById('sel-area').value;
+  activeLang = document.getElementById('sel-lang').value;
+  activeCat = activeNeed;
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.cat === (activeNeed||'')));
+  gcTrack(`houston/filter/need=${activeNeed}&area=${activeArea}&lang=${activeLang}`, 'Houston filter applied');
+  render(getFiltered());
+  document.getElementById('results-section').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function clearFilters() {
+  activeNeed=""; activeArea=""; activeLang=""; activeCat="";
+  ['sel-need','sel-area','sel-lang'].forEach(id => document.getElementById(id).value='');
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.cat===''));
+  render(RESOURCES);
+}
+
+function filterTab(el, cat) {
+  activeCat=cat; activeNeed=cat;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  gcTrack(`houston/tab/${cat||'all'}`, `Houston tab: ${cat||'All'}`);
+  render(getFiltered());
+}
+
+function openModal() {
+  document.getElementById('modal-overlay').classList.add('open');
+  gcTrack('houston/error-report-open','Houston error report opened');
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.getElementById('modal-form-body').style.display='';
+  document.getElementById('form-success').style.display='none';
+  document.getElementById('error-form').reset();
+  document.getElementById('form-err-msg').style.display='none';
+}
+function openReportFor(name) {
+  document.getElementById('err-resource').value = name;
+  openModal();
+}
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if (e.target===document.getElementById('modal-overlay')) closeModal();
+});
+
+document.getElementById('error-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('[type=submit]');
+  btn.textContent='Sending…'; btn.disabled=true;
+  try {
+    const res = await fetch(this.action, { method:'POST', body:new FormData(this), headers:{'Accept':'application/json'} });
+    if (res.ok) {
+      document.getElementById('modal-form-body').style.display='none';
+      document.getElementById('form-success').style.display='block';
+      gcTrack('houston/error-report-submitted','Houston error report submitted');
+    } else {
+      document.getElementById('form-err-msg').style.display='block';
+      btn.textContent='Send report'; btn.disabled=false;
+    }
+  } catch {
+    document.getElementById('form-err-msg').style.display='block';
+    btn.textContent='Send report'; btn.disabled=false;
+  }
+});
+
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b =>
+    b.classList.toggle('active', b.textContent.trim().toLowerCase().startsWith(lang==='en'?'eng':'esp'))
+  );
+  gcTrack(`houston/lang/${lang}`, `Houston language: ${lang}`);
+}
+
+render(RESOURCES);
+window.addEventListener('load', () => gcTrack('/houston','Houston Care Connect – Home'));
+</script>
+</body>
+</html>
