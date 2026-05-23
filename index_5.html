@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CommonKind — Kindness belongs to everyone</title>
+<meta name="description" content="A free global initiative bridging the world through kindness.">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script data-goatcounter="https://commonkind.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<style>
+:root{
+  --sage:#e8efe6;--sage2:#d0e0cc;--forest:#2d5a3d;--forest2:#1e3d2a;
+  --cream:#fdfcf8;--warm:#f5f0e8;--text:#1c2b1e;--text2:#4a5e4d;--text3:#7a8e7d;
+  --gold:#c9973a;--border:rgba(45,90,61,0.12);--r:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(253,252,248,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;}
+.nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.logo{font-family:'Lora',serif;font-size:18px;font-weight:400;color:var(--forest);}
+.logo span{color:var(--gold);}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{font-size:13px;color:var(--text2);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--forest);}
+
+.hero{background:linear-gradient(160deg,#e8f0e5 0%,#f5f0e8 60%,#fdfcf8 100%);padding:5rem 2rem 4rem;text-align:center;}
+.hero-inner{max-width:700px;margin:0 auto;}
+.hero-eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--forest);margin-bottom:1rem;font-weight:500;}
+.hero h1{font-family:'Lora',serif;font-size:clamp(36px,6vw,54px);font-weight:400;line-height:1.2;color:var(--text);margin-bottom:1.25rem;}
+.hero h1 em{color:var(--forest);font-style:italic;}
+.hero-sub{font-size:16px;color:var(--text2);line-height:1.75;max-width:520px;margin:0 auto 2rem;}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;background:var(--forest);color:#fff;padding:13px 28px;border-radius:30px;font-size:14px;font-weight:500;text-decoration:none;transition:background .2s;}
+.hero-cta:hover{background:var(--forest2);}
+.globe-row{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:2rem;opacity:.7;}
+.globe-row span{font-size:20px;}
+
+section{padding:4rem 2rem;}
+.section-inner{max-width:900px;margin:0 auto;}
+.section-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--forest);font-weight:500;margin-bottom:.5rem;}
+.section-title{font-family:'Lora',serif;font-size:clamp(22px,4vw,32px);font-weight:400;color:var(--text);margin-bottom:1rem;line-height:1.3;}
+.section-sub{font-size:15px;color:var(--text2);max-width:560px;line-height:1.75;margin-bottom:2rem;}
+
+/* GALLERY — static grid with horizontal scroll */
+.gallery-bg{background:var(--sage);}
+.gallery-controls{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;}
+.scroll-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--cream);color:var(--forest);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
+.scroll-btn:hover{background:var(--forest);color:#fff;border-color:var(--forest);}
+.gallery-scroll-wrap{overflow-x:auto;scrollbar-width:none;cursor:grab;}
+.gallery-scroll-wrap::-webkit-scrollbar{display:none;}
+.gallery-scroll-wrap.dragging{cursor:grabbing;}
+.gallery-row{display:flex;gap:14px;width:max-content;padding-bottom:4px;}
+.aff-card{width:260px;flex-shrink:0;border-radius:var(--r);padding:1.5rem;font-family:'Lora',serif;font-size:14px;line-height:1.65;font-style:italic;color:var(--text);}
+.aff-card .origin{font-family:'Inter',sans-serif;font-style:normal;font-size:11px;margin-top:10px;opacity:.6;letter-spacing:.05em;}
+.aff-card.c1{background:#e8f5e4;}.aff-card.c2{background:#fce8f0;}.aff-card.c3{background:#e4eef8;}
+.aff-card.c4{background:#fdf3e0;}.aff-card.c5{background:#ede8f5;}.aff-card.c6{background:#e8f5f0;}
+
+/* FEELING FINDER */
+.feeling-bg{background:var(--warm);}
+.feeling-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem;}
+.feeling-chip{padding:8px 18px;border:1px solid var(--border);border-radius:30px;font-size:13px;cursor:pointer;background:var(--cream);color:var(--text2);transition:all .2s;font-family:'Inter',sans-serif;}
+.feeling-chip:hover{border-color:var(--forest);color:var(--forest);}
+.feeling-chip.active{background:var(--forest);color:#fff;border-color:var(--forest);}
+.feeling-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:1rem;}
+.f-card{border-radius:var(--r);padding:1.5rem;font-family:'Lora',serif;font-size:15px;font-style:italic;line-height:1.65;color:var(--text);}
+.f-card .origin{font-family:'Inter',sans-serif;font-style:normal;font-size:11px;margin-top:10px;opacity:.6;letter-spacing:.05em;}
+.f-card.c1{background:#e8f5e4;}.f-card.c2{background:#fce8f0;}.f-card.c3{background:#e4eef8;}
+.f-card.c4{background:#fdf3e0;}.f-card.c5{background:#ede8f5;}.f-card.c6{background:#e8f5f0;}
+
+/* CHECK-IN */
+.checkin-bg{background:var(--cream);}
+.privacy-note{background:var(--sage);border-radius:var(--r);padding:.875rem 1.25rem;font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:1.5rem;border:1px solid var(--sage2);}
+.privacy-note strong{color:var(--forest);}
+.who5-card{background:#fff;border-radius:var(--r);padding:2rem;max-width:620px;border:1px solid var(--border);}
+.crisis-note{background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:.875rem 1.25rem;margin-bottom:1.5rem;font-size:13px;color:#5d4037;line-height:1.6;}
+.crisis-note a{color:var(--forest);font-weight:500;}
+.who5-q{margin-bottom:1.5rem;}
+.who5-q p{font-size:14px;color:var(--text);margin-bottom:10px;font-weight:500;line-height:1.5;}
+.who5-options{display:flex;gap:6px;flex-wrap:wrap;}
+.who5-opt{padding:6px 14px;border:1px solid var(--border);border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:var(--text2);transition:all .15s;font-family:'Inter',sans-serif;}
+.who5-opt:hover{border-color:var(--forest);color:var(--forest);}
+.who5-opt.sel{background:var(--forest);color:#fff;border-color:var(--forest);}
+.helpful-q{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+.helpful-q p{font-size:14px;font-weight:500;color:var(--text);margin-bottom:10px;}
+.helpful-opts{display:flex;gap:8px;flex-wrap:wrap;}
+.helpful-opt{padding:7px 16px;border:1px solid var(--border);border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:var(--text2);transition:all .15s;font-family:'Inter',sans-serif;}
+.helpful-opt:hover{border-color:var(--forest);color:var(--forest);}
+.helpful-opt.sel{background:var(--forest);color:#fff;border-color:var(--forest);}
+.who5-btn{margin-top:1.5rem;padding:11px 28px;background:var(--forest);color:#fff;border:none;border-radius:30px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;}
+.who5-btn:hover{background:var(--forest2);}
+.who5-result{display:none;margin-top:1.5rem;padding:1.5rem;border-radius:var(--r);background:var(--sage);}
+.result-heading{font-family:'Lora',serif;font-size:22px;font-weight:400;color:var(--forest);margin-bottom:.75rem;}
+.result-msg{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:1rem;}
+.result-resources a{display:block;font-size:13px;color:var(--forest);text-decoration:none;padding:5px 0;border-bottom:1px solid var(--border);}
+.result-resources a:last-child{border-bottom:none;}
+.result-resources a:hover{text-decoration:underline;}
+.sending-note{font-size:11px;color:var(--text3);margin-top:1rem;font-style:italic;}
+
+.journal-bg{background:var(--warm);}
+.prompt-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+.prompt-card{background:var(--cream);border-radius:var(--r);padding:1.25rem;border:1px solid var(--border);}
+.prompt-card .icon{font-size:20px;margin-bottom:.75rem;}
+.prompt-card p{font-size:13px;color:var(--text2);line-height:1.6;}
+
+.resources-bg{background:var(--sage);}
+.resource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.resource-card{background:#fff;border-radius:var(--r);padding:1.25rem;border:1px solid var(--border);}
+.resource-card h4{font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;}
+.resource-card p{font-size:12px;color:var(--text3);line-height:1.5;margin-bottom:10px;}
+.resource-card a{font-size:13px;color:var(--forest);text-decoration:none;font-weight:500;}
+.resource-card a:hover{text-decoration:underline;}
+.resource-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;background:var(--sage);color:var(--forest);margin-bottom:8px;font-weight:500;letter-spacing:.04em;}
+
+.mission-bg{background:var(--forest);color:#fff;}
+.mission-bg .section-label{color:var(--sage2);}
+.mission-bg .section-title{color:#fff;}
+.mission-bg .section-sub{color:rgba(255,255,255,.75);}
+.mission-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-top:2rem;}
+.m-stat{border:1px solid rgba(255,255,255,.15);border-radius:var(--r);padding:1.25rem;text-align:center;}
+.m-stat .num{font-family:'Lora',serif;font-size:32px;color:#fff;margin-bottom:4px;}
+.m-stat .lbl{font-size:12px;color:rgba(255,255,255,.6);letter-spacing:.06em;text-transform:uppercase;}
+
+footer{background:var(--text);color:rgba(255,255,255,.5);text-align:center;padding:2rem;font-size:12px;line-height:1.8;}
+footer a{color:rgba(255,255,255,.7);text-decoration:none;}
+footer strong{color:#fff;display:block;font-family:'Lora',serif;font-size:16px;font-weight:400;margin-bottom:6px;}
+
+@media(max-width:600px){
+  nav{padding:0 1rem;}
+  .hero,.feeling-bg,.gallery-bg,.checkin-bg,.journal-bg,.resources-bg,.mission-bg{padding:3rem 1rem;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Common<span>Kind</span></div>
+    <ul class="nav-links">
+      <li><a href="#gallery">Affirmations</a></li>
+      <li><a href="#feeling">How are you feeling?</a></li>
+      <li><a href="#checkin">Check-in</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#mission">Mission</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">A global kindness initiative</p>
+    <h1>Kindness belongs<br>to <em>everyone.</em></h1>
+    <p class="hero-sub">In a divided world, CommonKind is a space where young people everywhere are reminded that they are seen, valued, and not alone. A place to land when you need it.</p>
+    <a href="#gallery" class="hero-cta">Enter this space</a>
+    <div class="globe-row">
+      <span title="United States">🇺🇸</span><span title="Nigeria">🇳🇬</span><span title="India">🇮🇳</span>
+      <span title="Brazil">🇧🇷</span><span title="Philippines">🇵🇭</span><span title="Kenya">🇰🇪</span>
+      <span title="United Kingdom">🇬🇧</span><span title="Mexico">🇲🇽</span><span title="Indonesia">🇮🇩</span>
+      <span title="South Africa">🇿🇦</span><span title="Germany">🇩🇪</span><span title="Japan">🇯🇵</span>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-bg" id="gallery">
+  <div class="section-inner">
+    <p class="section-label">Gallery wall</p>
+    <h2 class="section-title">Words that feel like a warm hug</h2>
+    <p class="section-sub">From young people across the world — for the days you need them most. Click the arrows or drag to explore.</p>
+    <div class="gallery-controls">
+      <button class="scroll-btn" onclick="scrollGallery(-1)" aria-label="Scroll left">&#8592;</button>
+      <button class="scroll-btn" onclick="scrollGallery(1)" aria-label="Scroll right">&#8594;</button>
+    </div>
+  </div>
+  <div class="gallery-scroll-wrap" id="gallery-wrap" style="padding:0 2rem;">
+    <div class="gallery-row" id="gallery-row"></div>
+  </div>
+</section>
+
+<!-- FEELING FINDER -->
+<section class="feeling-bg" id="feeling">
+  <div class="section-inner">
+    <p class="section-label">What's troubling you most?</p>
+    <h2 class="section-title">Let's find the right words for you.</h2>
+    <p class="section-sub">Select what's on your heart right now — we'll share affirmations written just for that feeling.</p>
+    <div class="feeling-chips">
+      <button class="feeling-chip" onclick="showFeeling('lonely',this)">Loneliness</button>
+      <button class="feeling-chip" onclick="showFeeling('anxious',this)">Anxiety or worry</button>
+      <button class="feeling-chip" onclick="showFeeling('school',this)">School pressure</button>
+      <button class="feeling-chip" onclick="showFeeling('bullied',this)">Bullying or conflict</button>
+      <button class="feeling-chip" onclick="showFeeling('doubt',this)">Self-doubt</button>
+      <button class="feeling-chip" onclick="showFeeling('grief',this)">Loss or grief</button>
+      <button class="feeling-chip" onclick="showFeeling('global',this)">The state of the world</button>
+      <button class="feeling-chip" onclick="showFeeling('tired',this)">Just exhausted</button>
+    </div>
+    <div id="feeling-display"></div>
+  </div>
+</section>
+
+<!-- CHECK-IN -->
+<section class="checkin-bg" id="checkin">
+  <div class="section-inner">
+    <p class="section-label">Wellbeing check-in</p>
+    <h2 class="section-title">How have you been lately?</h2>
+    <p class="section-sub">A short reflection — for you, not for anyone else. No scores, no diagnosis, no judgment.</p>
+    <div class="privacy-note">
+      <strong>Your privacy matters.</strong> This check-in is completely anonymous. No personal information is collected, no account is needed, and your responses are never linked to you in any way. Anonymous aggregate responses help us understand whether CommonKind is actually helping people — nothing more.
+    </div>
+    <div class="who5-card">
+      <div class="crisis-note">
+        If you are in immediate distress, please reach out.
+        <a href="https://www.crisistextline.org" target="_blank">Crisis Text Line</a>: text HOME to 741741 (US/UK/Canada) ·
+        <a href="https://www.befrienders.org" target="_blank">Befrienders Worldwide</a> for international support.
+      </div>
+      <div id="who5-form">
+        <div class="who5-q" id="q0"><p>Over the last two weeks — I have felt cheerful and in good spirits.</p>
+          <div class="who5-options">
+            <button class="who5-opt" onclick="selectOpt(0,5,this)">All of the time</button>
+            <button class="who5-opt" onclick="selectOpt(0,4,this)">Most of the time</button>
+            <button class="who5-opt" onclick="selectOpt(0,3,this)">More than half</button>
+            <button class="who5-opt" onclick="selectOpt(0,2,this)">Less than half</button>
+            <button class="who5-opt" onclick="selectOpt(0,1,this)">Some of the time</button>
+            <button class="who5-opt" onclick="selectOpt(0,0,this)">At no time</button>
+          </div>
+        </div>
+        <div class="who5-q" id="q1"><p>I have felt calm and relaxed.</p>
+          <div class="who5-options">
+            <button class="who5-opt" onclick="selectOpt(1,5,this)">All of the time</button>
+            <button class="who5-opt" onclick="selectOpt(1,4,this)">Most of the time</button>
+            <button class="who5-opt" onclick="selectOpt(1,3,this)">More than half</button>
+            <button class="who5-opt" onclick="selectOpt(1,2,this)">Less than half</button>
+            <button class="who5-opt" onclick="selectOpt(1,1,this)">Some of the time</button>
+            <button class="who5-opt" onclick="selectOpt(1,0,this)">At no time</button>
+          </div>
+        </div>
+        <div class="who5-q" id="q2"><p>I have felt active and vigorous.</p>
+          <div class="who5-options">
+            <button class="who5-opt" onclick="selectOpt(2,5,this)">All of the time</button>
+            <button class="who5-opt" onclick="selectOpt(2,4,this)">Most of the time</button>
+            <button class="who5-opt" onclick="selectOpt(2,3,this)">More than half</button>
+            <button class="who5-opt" onclick="selectOpt(2,2,this)">Less than half</button>
+            <button class="who5-opt" onclick="selectOpt(2,1,this)">Some of the time</button>
+            <button class="who5-opt" onclick="selectOpt(2,0,this)">At no time</button>
+          </div>
+        </div>
+        <div class="who5-q" id="q3"><p>I woke up feeling fresh and rested.</p>
+          <div class="who5-options">
+            <button class="who5-opt" onclick="selectOpt(3,5,this)">All of the time</button>
+            <button class="who5-opt" onclick="selectOpt(3,4,this)">Most of the time</button>
+            <button class="who5-opt" onclick="selectOpt(3,3,this)">More than half</button>
+            <button class="who5-opt" onclick="selectOpt(3,2,this)">Less than half</button>
+            <button class="who5-opt" onclick="selectOpt(3,1,this)">Some of the time</button>
+            <button class="who5-opt" onclick="selectOpt(3,0,this)">At no time</button>
+          </div>
+        </div>
+        <div class="who5-q" id="q4"><p>My daily life has been filled with things that interest me.</p>
+          <div class="who5-options">
+            <button class="who5-opt" onclick="selectOpt(4,5,this)">All of the time</button>
+            <button class="who5-opt" onclick="selectOpt(4,4,this)">Most of the time</button>
+            <button class="who5-opt" onclick="selectOpt(4,3,this)">More than half</button>
+            <button class="who5-opt" onclick="selectOpt(4,2,this)">Less than half</button>
+            <button class="who5-opt" onclick="selectOpt(4,1,this)">Some of the time</button>
+            <button class="who5-opt" onclick="selectOpt(4,0,this)">At no time</button>
+          </div>
+        </div>
+        <div class="helpful-q">
+          <p>After spending time on this page, how do you feel compared to when you arrived?</p>
+          <div class="helpful-opts">
+            <button class="helpful-opt" onclick="selectHelpful('Much better',this)">Much better</button>
+            <button class="helpful-opt" onclick="selectHelpful('A little better',this)">A little better</button>
+            <button class="helpful-opt" onclick="selectHelpful('About the same',this)">About the same</button>
+            <button class="helpful-opt" onclick="selectHelpful('I just arrived',this)">I just arrived</button>
+          </div>
+        </div>
+        <button class="who5-btn" onclick="submitCheckin()">Submit anonymously</button>
+        <p class="sending-note">Your response is anonymous and helps us understand if this space is working. No personal data is ever collected.</p>
+      </div>
+      <div class="who5-result" id="who5-result">
+        <div class="result-heading" id="result-heading">Thank you for checking in.</div>
+        <div class="result-msg" id="result-msg"></div>
+        <div class="result-resources" id="result-resources"></div>
+        <button class="who5-btn" onclick="resetCheckin()" style="margin-top:1.25rem;background:transparent;color:var(--forest);border:1px solid var(--forest);padding:8px 22px;font-size:13px;">Take again</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNALING -->
+<section class="journal-bg" id="journal">
+  <div class="section-inner">
+    <p class="section-label">Daily journaling</p>
+    <h2 class="section-title">Leave your stress here</h2>
+    <p class="section-sub">Prompts to help you process, ground, and reconnect with yourself. No right answers.</p>
+    <div class="prompt-cards">
+      <div class="prompt-card"><div class="icon">🌿</div><p><strong>Sensory grounding:</strong> 5 things you see, 4 you feel, 3 you hear, 2 you touch, 1 you taste.</p></div>
+      <div class="prompt-card"><div class="icon">☀️</div><p><strong>Small joy:</strong> No matter how small — is there something that made you smile today?</p></div>
+      <div class="prompt-card"><div class="icon">📋</div><p><strong>Not now list:</strong> Write all your worries. Which ones don't need your attention right now?</p></div>
+      <div class="prompt-card"><div class="icon">🎯</div><p><strong>What you can control:</strong> What is your biggest stressor? What can you actually do about it today?</p></div>
+      <div class="prompt-card"><div class="icon">💌</div><p><strong>Letter to yourself:</strong> Three sentences to your past self about what they should know.</p></div>
+      <div class="prompt-card"><div class="icon">🌍</div><p><strong>One act:</strong> What is one small act of kindness you can offer someone today — anywhere in the world?</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section class="resources-bg" id="resources">
+  <div class="section-inner">
+    <p class="section-label">Immediate comfort</p>
+    <h2 class="section-title">Real help, wherever you are</h2>
+    <p class="section-sub">Free mental health and crisis resources for young people globally.</p>
+    <div class="resource-grid">
+      <div class="resource-card"><span class="resource-tag">Crisis · Global</span><h4>Crisis Text Line</h4><p>Free, confidential support via text 24/7. US, UK, Canada, Ireland.</p><a href="https://www.crisistextline.org" target="_blank">Text HOME to 741741 →</a></div>
+      <div class="resource-card"><span class="resource-tag">Crisis · Global</span><h4>Befrienders Worldwide</h4><p>International network of crisis centers. Find support in your country.</p><a href="https://www.befrienders.org" target="_blank">befrienders.org →</a></div>
+      <div class="resource-card"><span class="resource-tag">Mental health · All ages</span><h4>Mental Health America</h4><p>Screening tools, resources, and a college mental health toolkit.</p><a href="https://mhanational.org" target="_blank">mhanational.org →</a></div>
+      <div class="resource-card"><span class="resource-tag">Youth · Global</span><h4>UNICEF for Every Child</h4><p>Mental health resources specifically for young people worldwide.</p><a href="https://www.unicef.org/mental-health" target="_blank">unicef.org/mental-health →</a></div>
+      <div class="resource-card"><span class="resource-tag">Anti-bullying · Schools</span><h4>StopBullying.gov</h4><p>Resources for students, parents, and educators on preventing bullying.</p><a href="https://www.stopbullying.gov" target="_blank">stopbullying.gov →</a></div>
+      <div class="resource-card"><span class="resource-tag">Eating disorders</span><h4>Alliance for Eating Disorders</h4><p>Free helpline. National Alliance for Eating Disorders.</p><a href="https://www.allianceforeatingdisorders.com" target="_blank">Call 1-866-662-1235 →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission-bg" id="mission">
+  <div class="section-inner">
+    <p class="section-label">Our mission</p>
+    <h2 class="section-title">Kindness is infrastructure.</h2>
+    <p class="section-sub">CommonKind was built on the belief that in a time of global conflict and division, kindness is not soft — it is structural. A world without bullying is not a dream. It is buildable, one affirmation, one school, one community at a time.</p>
+    <p class="section-sub">This initiative was built with the goal of bringing kindness infrastructure into schools across the world — making encouragement permanently accessible to every student, everywhere. Every visitor to this page is part of that vision.</p>
+    <div class="mission-stats">
+      <div class="m-stat"><div class="num">Global</div><div class="lbl">Built for everyone</div></div>
+      <div class="m-stat"><div class="num">Free</div><div class="lbl">Always, for everyone</div></div>
+      <div class="m-stat"><div class="num">WHO-5</div><div class="lbl">Validated wellbeing scale</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>CommonKind</strong>
+  Built by <a href="https://www.shutterstock.com/g/Clicks+by+Anna" target="_blank">Ananya Bharathapudi</a> · A free global kindness initiative ·
+  <a href="mailto:ananyabvs@gmail.com">Contact</a><br><br>
+  If you are in crisis: <a href="https://www.crisistextline.org">Crisis Text Line</a> · <a href="https://www.befrienders.org">Befrienders Worldwide</a><br><br>
+  <span style="font-size:11px;opacity:.5">All check-in responses are anonymous. No personal data is ever collected or stored.</span>
+</footer>
+
+<script>
+const ALL_AFFIRMATIONS=[
+  {text:"You don't have to have everything figured out to be worthy of being here. You already belong.",origin:"United States",c:"c1"},
+  {text:"Even on days you doubt yourself, you are still capable, still worthy, still enough.",origin:"Nigeria",c:"c2"},
+  {text:"Your story is not finished. The hardest chapters are never the last ones.",origin:"Philippines",c:"c3"},
+  {text:"Even if it may not seem like it, your younger self is incredibly proud of you.",origin:"United States",c:"c4"},
+  {text:"You are allowed to rest. You are allowed to be a work in progress.",origin:"Kenya",c:"c5"},
+  {text:"The world is better because you are in it — exactly as you are today.",origin:"India",c:"c6"},
+  {text:"Being kind to yourself is not weakness. It is the bravest thing you can do.",origin:"Brazil",c:"c2"},
+  {text:"You are not behind. You are on your own timeline, and it is exactly right.",origin:"South Africa",c:"c1"},
+  {text:"One kind word can change someone's entire day. Yours has already changed mine.",origin:"Indonesia",c:"c4"},
+  {text:"You are seen. You are heard. You matter — not for what you do, but for who you are.",origin:"Mexico",c:"c3"},
+  {text:"Healing is not linear. Coming back to yourself, even slowly, is still coming back.",origin:"United Kingdom",c:"c5"},
+  {text:"There is no version of kindness too small. A smile across a conflict is still a bridge.",origin:"Germany",c:"c6"},
+  {text:"You cannot carry the whole world. But you can be kind in your corner of it.",origin:"Philippines",c:"c4"},
+  {text:"Your anxiety is not a character flaw. It is your mind trying to protect you.",origin:"Japan",c:"c1"},
+  {text:"Tired is not weak. Tired is what happens when you have been strong for too long.",origin:"Mexico",c:"c2"},
+  {text:"What someone does to you says everything about them and nothing about your worth.",origin:"Germany",c:"c3"},
+  {text:"Grief is love with nowhere to go. It is proof that something mattered.",origin:"United Kingdom",c:"c5"},
+  {text:"You have survived every hard day so far — every single one.",origin:"Brazil",c:"c4"},
+  {text:"Connection does not require proximity. You belong to this world.",origin:"India",c:"c1"},
+  {text:"The fact that the state of the world hurts you means you have a good heart.",origin:"Indonesia",c:"c6"},
+];
+
+const FEELINGS={
+  lonely:[
+    {text:"You are not as alone as it feels right now. Somewhere in the world, someone else is sitting with this same feeling — and thinking of you.",origin:"Kenya",c:"c1"},
+    {text:"Being lonely does not mean you are unlikeable. It means you haven't found your people yet. They exist.",origin:"Philippines",c:"c3"},
+    {text:"Connection does not require proximity. You belong to this world, to this page, to every person who has ever felt what you feel.",origin:"India",c:"c5"},
+  ],
+  anxious:[
+    {text:"Your anxiety is not a character flaw. It is your mind trying to protect you. You can thank it, and then gently set it down.",origin:"United Kingdom",c:"c4"},
+    {text:"You don't have to solve everything today. You only have to get through today.",origin:"United States",c:"c2"},
+    {text:"The feeling will pass. It always has. You have survived every hard day so far — every single one.",origin:"Brazil",c:"c6"},
+  ],
+  school:[
+    {text:"Your worth is not your GPA. Your grades measure one small slice of one type of intelligence. You contain multitudes.",origin:"South Africa",c:"c3"},
+    {text:"You are not behind. You are on your own timeline, and it is exactly right.",origin:"Nigeria",c:"c1"},
+    {text:"Even if it may not seem like it, your younger self is incredibly proud of how far you have come.",origin:"United States",c:"c4"},
+  ],
+  bullied:[
+    {text:"What someone does to you says everything about them and nothing about your worth.",origin:"Germany",c:"c2"},
+    {text:"You deserve to feel safe. That is not a privilege — it is a right. Please tell a trusted adult.",origin:"Mexico",c:"c5"},
+    {text:"There is a version of your future where none of this follows you. You are moving toward it every day.",origin:"Kenya",c:"c6"},
+  ],
+  doubt:[
+    {text:"Even on days you doubt yourself, you are still capable, still worthy, still enough.",origin:"Nigeria",c:"c1"},
+    {text:"Being kind to yourself is not weakness. It is the bravest thing you can do.",origin:"Brazil",c:"c2"},
+    {text:"You don't have to have everything figured out to be worthy of being here. You already belong.",origin:"United States",c:"c4"},
+  ],
+  grief:[
+    {text:"Grief is love with nowhere to go. It is proof that something mattered. Let it matter.",origin:"United Kingdom",c:"c5"},
+    {text:"Healing is not linear. Coming back to yourself, even slowly, is still coming back.",origin:"India",c:"c3"},
+    {text:"You are allowed to not be okay. Rest is not giving up. It is preparation.",origin:"South Africa",c:"c6"},
+  ],
+  global:[
+    {text:"There is no version of kindness too small. A smile across a conflict line is still a bridge.",origin:"Germany",c:"c1"},
+    {text:"You cannot carry the whole world. But you can be kind in your corner of it — and that ripples.",origin:"Philippines",c:"c4"},
+    {text:"The fact that the state of the world hurts you means you have a good heart. The world needs that heart.",origin:"Indonesia",c:"c2"},
+  ],
+  tired:[
+    {text:"You are allowed to rest. You are allowed to be a work in progress. Both things are true.",origin:"Japan",c:"c3"},
+    {text:"Tired is not weak. Tired is what happens when you have been strong for too long. Rest now.",origin:"Mexico",c:"c5"},
+    {text:"Your body is asking for something. Listen to it. You cannot pour from an empty vessel.",origin:"Kenya",c:"c6"},
+  ],
+};
+
+// Build gallery
+const row = document.getElementById('gallery-row');
+row.innerHTML = ALL_AFFIRMATIONS.map(a=>`<div class="aff-card ${a.c}">"${a.text}"<div class="origin">— ${a.origin}</div></div>`).join('');
+
+// Arrow scroll
+function scrollGallery(dir){
+  const wrap = document.getElementById('gallery-wrap');
+  wrap.scrollBy({left: dir * 560, behavior:'smooth'});
+}
+
+// Drag to scroll
+const wrap = document.getElementById('gallery-wrap');
+let isDown=false,startX,scrollLeft;
+wrap.addEventListener('mousedown',e=>{isDown=true;wrap.classList.add('dragging');startX=e.pageX-wrap.offsetLeft;scrollLeft=wrap.scrollLeft;});
+wrap.addEventListener('mouseleave',()=>{isDown=false;wrap.classList.remove('dragging');});
+wrap.addEventListener('mouseup',()=>{isDown=false;wrap.classList.remove('dragging');});
+wrap.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-wrap.offsetLeft;wrap.scrollLeft=scrollLeft-(x-startX)*1.2;});
+
+// Feeling finder
+function showFeeling(key,el){
+  document.querySelectorAll('.feeling-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  const affs=FEELINGS[key]||[];
+  const display=document.getElementById('feeling-display');
+  display.innerHTML=`<div class="feeling-cards">${affs.map(a=>`<div class="f-card ${a.c}">"${a.text}"<div class="origin">— ${a.origin}</div></div>`).join('')}</div>`;
+  setTimeout(()=>display.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+}
+
+// WHO-5
+const answers=[null,null,null,null,null];
+let helpfulAnswer='';
+function selectOpt(q,val,el){answers[q]=val;document.querySelectorAll(`#q${q} .who5-opt`).forEach(o=>o.classList.remove('sel'));el.classList.add('sel');}
+function selectHelpful(val,el){helpfulAnswer=val;document.querySelectorAll('.helpful-opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');}
+
+async function submitCheckin(){
+  if(answers.some(a=>a===null)){alert('Please answer all five questions before submitting.');return;}
+  const raw=answers.reduce((a,b)=>a+b,0);
+  const scaled=raw*4;
+  const tier=scaled>=72?'high':scaled>=52?'medium':'low';
+  const optLabels=['At no time','Some of the time','Less than half','More than half','Most of the time','All of the time'];
+  const labels=['cheerful_good_spirits','calm_relaxed','active_vigorous','fresh_rested','daily_interest'];
+  const fd=new FormData();
+  fd.append('_subject','CommonKind anonymous check-in');
+  labels.forEach((l,i)=>fd.append(l,optLabels[answers[i]]));
+  fd.append('who5_raw_score',raw);
+  fd.append('who5_scaled_score',scaled);
+  fd.append('wellbeing_tier',tier);
+  fd.append('felt_better_after_site',helpfulAnswer||'not answered');
+  fd.append('timestamp',new Date().toISOString());
+  fd.append('_gotcha','');
+  try{await fetch('https://formspree.io/f/xkoebvja',{method:'POST',body:fd,headers:{Accept:'application/json'}});}catch(e){}
+  document.getElementById('who5-form').style.display='none';
+  const res=document.getElementById('who5-result');
+  res.style.display='block';
+  document.getElementById('result-heading').textContent='Thank you for checking in with yourself today.';
+  const msg=document.getElementById('result-msg');
+  const resources=document.getElementById('result-resources');
+  if(tier==='high'){
+    res.style.background='#e8f5e4';
+    msg.innerHTML='That took courage — pausing to reflect is not small. Whatever brought you here today, we hope this space offered something warm. You deserve to feel good, and it sounds like you\'re finding your way there.';
+    resources.innerHTML='<a href="#gallery">Read more affirmations →</a><a href="#journal">Try a journaling prompt →</a>';
+  }else if(tier==='medium'){
+    res.style.background='#fdf3e0';
+    msg.innerHTML='Something might be weighing on you — and that\'s okay. You showed up here, which means part of you is looking for light. That part is right. Be gentle with yourself today.';
+    resources.innerHTML='<a href="#feeling">Find affirmations for what you\'re feeling →</a><a href="https://mhanational.org" target="_blank">Mental Health America resources →</a>';
+  }else{
+    res.style.background='#fce8f0';
+    msg.innerHTML='It sounds like things have been hard lately. You are not alone in this, even when it feels that way. Please consider reaching out to someone you trust — or one of the resources below. You came to this page, which means some part of you is still reaching for something better. Hold onto that.';
+    resources.innerHTML='<a href="https://www.crisistextline.org" target="_blank">Crisis Text Line — text HOME to 741741 →</a><a href="https://www.befrienders.org" target="_blank">Befrienders Worldwide →</a><a href="https://mhanational.org" target="_blank">Mental Health America →</a>';
+  }
+}
+
+function resetCheckin(){
+  answers.fill(null);helpfulAnswer='';
+  document.getElementById('who5-form').style.display='block';
+  document.getElementById('who5-result').style.display='none';
+  document.querySelectorAll('.who5-opt,.helpful-opt').forEach(o=>o.classList.remove('sel'));
+}
+</script>
+</body>
+</html>
